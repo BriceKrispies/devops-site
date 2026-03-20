@@ -1,0 +1,83 @@
+@layer tokens {
+  :root {
+    /* Color — backgrounds */
+    --color-bg-primary: #0c0e12;
+    --color-bg-secondary: #12151b;
+    --color-bg-surface: #171b22;
+    --color-bg-elevated: #1e222b;
+    --color-bg-inset: #0a0c0f;
+
+    /* Color — text */
+    --color-text-primary: #cdd1db;
+    --color-text-secondary: #737985;
+    --color-text-muted: #464b55;
+    --color-text-bright: #eef0f5;
+
+    /* Color — borders */
+    --color-border-default: #232830;
+    --color-border-subtle: #1a1e25;
+    --color-border-hard: #2e333d;
+
+    /* Color — accents (status + interaction only) */
+    --color-accent-blue: #4a90d9;
+    --color-accent-green: #2faa6f;
+    --color-accent-red: #d45454;
+    --color-accent-yellow: #c99a2e;
+    --color-accent-purple: #8a7abf;
+
+    /* Color — semantic status */
+    --color-status-passing: var(--color-accent-green);
+    --color-status-failing: var(--color-accent-red);
+    --color-status-pending: var(--color-accent-yellow);
+    --color-status-unknown: var(--color-text-muted);
+
+    /* Spacing */
+    --space-1: 0.125rem;
+    --space-2: 0.25rem;
+    --space-3: 0.5rem;
+    --space-4: 0.75rem;
+    --space-5: 1rem;
+    --space-6: 1.5rem;
+    --space-7: 2rem;
+    --space-8: 3rem;
+
+    /* Border radius */
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
+
+    /* Typography */
+    --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-family-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+    --font-size-xs: 0.6875rem;
+    --font-size-sm: 0.8125rem;
+    --font-size-base: 0.875rem;
+    --font-size-lg: 1rem;
+    --font-size-xl: 1.125rem;
+    --font-size-2xl: 1.25rem;
+    --font-size-3xl: 1.5rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.2;
+    --line-height-base: 1.4;
+    --line-height-relaxed: 1.6;
+
+    /* Elevation */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    /* Motion */
+    --duration-fast: 80ms;
+    --duration-base: 150ms;
+    --duration-slow: 300ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-in: cubic-bezier(0.4, 0, 1, 1);
+    --easing-out: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
