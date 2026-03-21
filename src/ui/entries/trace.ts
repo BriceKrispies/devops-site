@@ -7,6 +7,7 @@ import type { TraceEvent } from "../../types/models";
 import { mockTraceAdapter } from "../../adapters/mock/trace";
 import { createTraceSearchEffect } from "../../effects/trace-search";
 import { renderTrace } from "../renderers/trace";
+import "../sidebar-toggle";
 
 const store = createStore();
 

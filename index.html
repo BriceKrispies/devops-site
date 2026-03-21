@@ -11,6 +11,7 @@
 
     <!-- ── Top bar ── -->
     <header class="topbar">
+      <button class="topbar-menu-toggle" aria-label="Menu"><span></span></button>
       <span class="topbar-brand">DevOps Portal</span>
       <span class="topbar-env">production</span>
     </header>
@@ -22,6 +23,7 @@
       <div class="nav-section">Investigate</div>
       <a class="nav-item" href="./src/pages/trace.html">Trace</a>
     </nav>
+    <div class="sidebar-backdrop"></div>
 
     <!-- ── Main content ── -->
     <main class="main-content">
@@ -64,11 +66,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td><span class="skeleton skel-cell skel-w-lg"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-md"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
-                  <tr><td><span class="skeleton skel-cell skel-w-lg"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-md"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
-                  <tr><td><span class="skeleton skel-cell skel-w-lg"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-md"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
-                  <tr><td><span class="skeleton skel-cell skel-w-lg"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-md"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
-                  <tr><td><span class="skeleton skel-cell skel-w-lg"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td><td><span class="skeleton skel-cell skel-w-md"></span></td><td><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
+                  <tr><td data-label="Service"><span class="skeleton skel-cell skel-w-lg"></span></td><td data-label="Env"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Status"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Commit"><span class="skeleton skel-cell skel-w-md"></span></td><td data-label="When"><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
+                  <tr><td data-label="Service"><span class="skeleton skel-cell skel-w-lg"></span></td><td data-label="Env"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Status"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Commit"><span class="skeleton skel-cell skel-w-md"></span></td><td data-label="When"><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
+                  <tr><td data-label="Service"><span class="skeleton skel-cell skel-w-lg"></span></td><td data-label="Env"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Status"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Commit"><span class="skeleton skel-cell skel-w-md"></span></td><td data-label="When"><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
+                  <tr><td data-label="Service"><span class="skeleton skel-cell skel-w-lg"></span></td><td data-label="Env"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Status"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Commit"><span class="skeleton skel-cell skel-w-md"></span></td><td data-label="When"><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
+                  <tr><td data-label="Service"><span class="skeleton skel-cell skel-w-lg"></span></td><td data-label="Env"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Status"><span class="skeleton skel-cell skel-w-sm"></span></td><td data-label="Commit"><span class="skeleton skel-cell skel-w-md"></span></td><td data-label="When"><span class="skeleton skel-cell skel-w-sm"></span></td></tr>
                 </tbody>
               </table>
             </div>
