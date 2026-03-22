@@ -1,0 +1,778 @@
+@layer components {
+  /* ── Topbar ── */
+  .topbar-brand {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .topbar-env {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-family-mono);
+    color: var(--color-status-passing);
+    line-height: 1;
+  }
+
+  .topbar-env::before {
+    content: "\25CF ";
+    font-size: 0.5em;
+    vertical-align: middle;
+  }
+
+  /* ── Sidebar nav ── */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast) var(--easing-default);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover {
+    color: var(--color-text-secondary);
+  }
+
+  .nav-item.active {
+    color: var(--color-text-bright);
+    border-left-color: var(--color-accent-blue);
+    background: var(--color-bg-surface);
+  }
+
+  .nav-section {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: var(--space-4) var(--space-4) var(--space-2);
+  }
+
+  .nav-section:first-child {
+    padding-top: var(--space-2);
+  }
+
+  /* ── Panel system ── */
+  .region-card {
+    background: var(--color-bg-surface);
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .region-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .region-card-header h2 {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .region-card-body {
+    padding: 0;
+  }
+
+  /* ── Service Health — compact status strip ── */
+  .dashboard-grid > .region-card:first-child {
+    background: var(--color-bg-secondary);
+  }
+
+  .dashboard-grid > .region-card:first-child .region-card-header {
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .dashboard-grid > .region-card:first-child .region-card-body {
+    padding: var(--space-2) var(--space-4);
+  }
+
+  /* ── Primary panel — Recent Deployments (second child) ── */
+  .dashboard-grid > .region-card:nth-child(2) {
+    background: var(--color-bg-elevated);
+  }
+
+  .dashboard-grid > .region-card:nth-child(2) .region-card-header {
+    border-bottom: 1px solid var(--color-border-hard);
+    border-left: 3px solid var(--color-accent-blue);
+    padding-left: calc(var(--space-4) - 3px);
+  }
+
+  .dashboard-grid > .region-card:nth-child(2) .region-card-header h2 {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Skeletons ── */
+  .skeleton {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-sm);
+    animation: skeleton-pulse var(--duration-slow) var(--easing-default) infinite alternate;
+    display: inline-block;
+  }
+
+  .skel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skel-name {
+    flex: 1;
+    height: 0.8125em;
+    max-width: 10rem;
+  }
+
+  .skel-meta {
+    width: 8rem;
+    height: 0.6875em;
+  }
+
+  .skel-cell {
+    height: 0.8125em;
+    display: inline-block;
+  }
+
+  .skel-w-sm { width: 3.5rem; }
+  .skel-w-md { width: 5rem; }
+  .skel-w-lg { width: 7rem; }
+
+  /* Skeleton inside the compact service health strip needs matching bg */
+  .dashboard-grid > .region-card:first-child .skeleton {
+    background: var(--color-bg-surface);
+  }
+
+  @keyframes skeleton-pulse {
+    from { opacity: 0.2; }
+    to { opacity: 0.45; }
+  }
+
+  /* ── Region state visibility ── */
+  [data-region][data-state="loading"] .region-content { display: none; }
+  [data-region][data-state="loading"] .region-loading { display: block; }
+
+  [data-region][data-state="resolved"] .region-content { display: block; }
+  [data-region][data-state="resolved"] .region-loading { display: none; }
+
+  [data-region][data-state="error"] .region-content { display: block; }
+  [data-region][data-state="error"] .region-loading { display: none; }
+
+  [data-region][data-state="empty"] .region-content { display: block; }
+  [data-region][data-state="empty"] .region-loading { display: none; }
+
+  /* ── Region resolved fade-in ── */
+  [data-region] .region-content {
+    animation: region-fade-in var(--duration-base) var(--easing-out);
+  }
+
+  @keyframes region-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── Region error / empty states ── */
+  .region-error,
+  .region-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-4);
+    min-height: 6rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .region-error {
+    color: var(--color-status-failing);
+  }
+
+  /* ── Service health list — dense two-column grid ── */
+  .service-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-7);
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-1) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .service-item:last-child {
+    border-bottom: none;
+  }
+
+  /* In a 2-col grid with 5 items, items 1-3 are left col, 4-5 are right col.
+     But CSS grid auto-fills rows first, so with 5 items:
+     row1: item1, item2 | row2: item3, item4 | row3: item5
+     Last item in each visual column needs no bottom border */
+  .service-item:nth-last-child(2) {
+    border-bottom: none;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-dot--healthy { background: var(--color-status-passing); }
+  .status-dot--degraded { background: var(--color-status-pending); }
+  .status-dot--down { background: var(--color-status-failing); }
+
+  .service-name {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-primary);
+    flex: 1;
+  }
+
+  .service-meta {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+  }
+
+  /* ── Deployment table ── */
+  .deploy-table {
+    font-size: var(--font-size-sm);
+  }
+
+  .deploy-table th {
+    text-align: left;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-bg-inset);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .deploy-table td {
+    padding: var(--space-1) var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
+  }
+
+  .deploy-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .deploy-table tbody tr:hover td {
+    background: var(--color-bg-elevated);
+  }
+
+  .deploy-table td:first-child {
+    font-family: var(--font-family-mono);
+    color: var(--color-text-primary);
+  }
+
+  .deploy-table code {
+    color: var(--color-text-muted);
+  }
+
+  /* ── Status text — no boxes, just color ── */
+  .badge {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .badge--env {
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+  }
+
+  .badge--success {
+    color: var(--color-status-passing);
+  }
+
+  .badge--failed {
+    color: var(--color-status-failing);
+  }
+
+  .badge--rolling {
+    color: var(--color-status-pending);
+  }
+
+  /* ── Job list ── */
+  .job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .job-item {
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .job-item:last-child {
+    border-bottom: none;
+  }
+
+  .job-item:hover {
+    background: var(--color-bg-elevated);
+  }
+
+  .job-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .job-status {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .job-status--running { background: var(--color-accent-blue); }
+  .job-status--queued { background: var(--color-status-pending); }
+  .job-status--passed { background: var(--color-status-passing); }
+  .job-status--failed { background: var(--color-status-failing); }
+
+  .job-name {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+  }
+
+  .job-meta {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+    padding-left: calc(6px + var(--space-3));
+    margin-top: 0;
+  }
+
+  /* ═══════════════════════════════════════════
+     Trace / Timeline Explorer
+     ═══════════════════════════════════════════ */
+
+  /* ── Search bar ── */
+  .trace-view {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .trace-search {
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border-hard);
+  }
+
+  .trace-search-input {
+    width: 100%;
+    background: var(--color-bg-inset);
+    border: 1px solid var(--color-border-default);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    padding: var(--space-3) var(--space-4);
+    outline: none;
+    border-radius: var(--radius-sm);
+  }
+
+  .trace-search-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .trace-search-input:focus {
+    border-color: var(--color-accent-blue);
+  }
+
+  /* ── Pre-search prompt ── */
+  .trace-prompt {
+    padding: var(--space-7) var(--space-5);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .trace-prompt-hint {
+    margin-top: var(--space-2);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  /* ── Timeline ── */
+  .trace-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-base);
+  }
+
+  .trace-entry {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: var(--space-1) var(--space-5);
+    border-bottom: 1px solid var(--color-border-subtle);
+    border-left: 2px solid transparent;
+  }
+
+  .trace-entry:hover {
+    background: var(--color-bg-elevated);
+  }
+
+  .trace-entry--jira  { border-left-color: var(--color-accent-blue); }
+  .trace-entry--github { border-left-color: var(--color-accent-purple); }
+  .trace-entry--ci     { border-left-color: var(--color-accent-green); }
+
+  .trace-time {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    width: 5em;
+  }
+
+  .trace-source {
+    flex-shrink: 0;
+    width: 3.5em;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+  }
+
+  .trace-source--jira   { color: var(--color-accent-blue); }
+  .trace-source--github { color: var(--color-accent-purple); }
+  .trace-source--ci     { color: var(--color-accent-green); }
+
+  .trace-type {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    width: 10em;
+  }
+
+  .trace-summary {
+    color: var(--color-text-primary);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .trace-entities {
+    display: flex;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .trace-entity {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  /* ── Trace empty state ── */
+  .trace-empty {
+    padding: var(--space-7) var(--space-5);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  /* ── Trace skeleton rows ── */
+  .trace-skel {
+    border-left-color: transparent;
+  }
+
+  .trace-results-loading {
+    padding: 0;
+  }
+
+  /* ═══════════════════════════════════════════
+     Capability Shell — Cards, Badges, Areas
+     ═══════════════════════════════════════════ */
+
+  /* ── Nav planned indicator ── */
+  .nav-item--planned {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  .nav-item--planned::after {
+    content: "soon";
+    font-size: 0.5625rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+    padding: 0.0625rem 0.25rem;
+    border-radius: var(--radius-sm);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-item--planned:hover {
+    opacity: 0.8;
+  }
+
+  .nav-item--planned.active {
+    opacity: 1;
+  }
+
+  .nav-item--planned.active::after {
+    display: none;
+  }
+
+  /* ── Area landing layout ── */
+  .area-landing {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  /* ── Area header ── */
+  .area-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-5) var(--space-4);
+    border-bottom: 1px solid var(--color-border-default);
+    background: var(--color-bg-secondary);
+  }
+
+  .area-header-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-bright);
+    line-height: var(--line-height-tight);
+  }
+
+  .area-header-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+  }
+
+  .area-header-stats {
+    flex-shrink: 0;
+  }
+
+  .area-stat {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-family-mono);
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── Capability grid ── */
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  /* ── Capability card ── */
+  .cap-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    transition: border-color var(--duration-fast) var(--easing-default),
+                background var(--duration-fast) var(--easing-default);
+  }
+
+  .cap-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .cap-card-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .cap-card-badges {
+    display: flex;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .cap-card-desc {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .cap-card-perms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+
+  .cap-perm {
+    font-size: 0.5625rem;
+    font-family: var(--font-family-mono);
+    color: var(--color-text-muted);
+    background: var(--color-bg-inset);
+    padding: 0.0625rem var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── Card status variants ── */
+  .cap-card--ready {
+    border-left: 2px solid var(--color-status-passing);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .cap-card--ready:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-status-passing);
+  }
+
+  .cap-card--ready .cap-card-name {
+    color: var(--color-text-bright);
+  }
+
+  .cap-card--stub {
+    border-left: 2px solid var(--color-status-pending);
+    opacity: 0.75;
+  }
+
+  .cap-card--planned {
+    border-left: 2px solid var(--color-text-muted);
+    opacity: 0.55;
+  }
+
+  .cap-card--disabled {
+    border-left: 2px solid var(--color-status-failing);
+    opacity: 0.4;
+  }
+
+  /* ── Card risk highlights ── */
+  .cap-card--risk-high .cap-card-name::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent-yellow);
+    margin-right: var(--space-2);
+    vertical-align: middle;
+  }
+
+  .cap-card--risk-critical .cap-card-name::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent-red);
+    margin-right: var(--space-2);
+    vertical-align: middle;
+  }
+
+  /* ── Capability skeleton cards ── */
+  .cap-card--skel {
+    border-left: 2px solid var(--color-bg-elevated);
+  }
+
+  .cap-card--skel .skeleton {
+    background: var(--color-bg-elevated);
+  }
+
+  /* ── Status badges ── */
+  .cap-status {
+    font-size: 0.5625rem;
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.0625rem var(--space-2);
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+
+  .cap-status--ready {
+    color: var(--color-status-passing);
+    background: rgba(47, 170, 111, 0.1);
+  }
+
+  .cap-status--stub {
+    color: var(--color-status-pending);
+    background: rgba(201, 154, 46, 0.1);
+  }
+
+  .cap-status--planned {
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+  }
+
+  .cap-status--disabled {
+    color: var(--color-status-failing);
+    background: rgba(212, 84, 84, 0.1);
+  }
+
+  /* ── Risk badges ── */
+  .cap-risk {
+    font-size: 0.5625rem;
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.0625rem var(--space-2);
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+
+  .cap-risk--low {
+    color: var(--color-text-muted);
+  }
+
+  .cap-risk--medium {
+    color: var(--color-accent-blue);
+    background: rgba(74, 144, 217, 0.1);
+  }
+
+  .cap-risk--high {
+    color: var(--color-accent-yellow);
+    background: rgba(201, 154, 46, 0.1);
+  }
+
+  .cap-risk--critical {
+    color: var(--color-accent-red);
+    background: rgba(212, 84, 84, 0.1);
+  }
+
+  /* ── Area landing region state ── */
+  #area-capabilities[data-state="loading"] .region-content { display: none; }
+  #area-capabilities[data-state="loading"] .region-loading { display: block; }
+  #area-capabilities[data-state="resolved"] .region-content { display: block; }
+  #area-capabilities[data-state="resolved"] .region-loading { display: none; }
+}

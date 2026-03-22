@@ -1,2 +1,28 @@
-node_modules/
-dist/
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Backend (.NET)
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/*.user
+backend/*.suo
+backend/*.userprefs
+backend/*.DotSettings.user
+backend/TestResults/
+backend/artifacts/
+backend/.idea/
+backend/*.swp
+**/bin/
+**/obj/
+
+# IDE
+.vs/
+.idea/
+*.swp
+*.suo
+
+# OS
+Thumbs.db
+.DS_Store

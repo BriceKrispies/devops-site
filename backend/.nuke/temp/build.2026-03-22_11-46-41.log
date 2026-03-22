@@ -1,0 +1,213 @@
+V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+V |                      | HandleReSharperSurrogateArguments.OnBuildCreated (150)
+V |                      | InjectParameterValues.OnBuildCreated (100)
+V |                      | HandleShellCompletion.OnBuildCreated (75)
+V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+V |                      | UpdateNotification.OnBuildCreated (10)
+V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+V |                      | HandlePlanRequests.OnBuildInitialized (10)
+V |                      | HandleHelpRequests.OnBuildInitialized (5)
+V |                      | Telemetry.OnBuildInitialized (0)
+V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | Restore              | > "C:\Program Files\dotnet\dotnet.exe" restore C:\dev\devops-site\backend\DevOpsSite.sln
+V | Restore              | @ C:\dev\devops-site\backend
+D | Restore              |   Determining projects to restore...
+D | Restore              |   All projects are up-to-date for restore.
+V | Restore              | Telemetry.OnTargetSucceeded (0)
+V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | BuildAll             | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | BuildAll             | > "C:\Program Files\dotnet\dotnet.exe" build C:\dev\devops-site\backend\DevOpsSite.sln --configuration Release --no-restore --nologo
+V | BuildAll             | @ C:\dev\devops-site\backend
+D | BuildAll             |   DevOpsSite.Domain -> C:\dev\devops-site\backend\src\DevOpsSite.Domain\bin\Release\net8.0\DevOpsSite.Domain.dll
+D | BuildAll             |   DevOpsSite.Application -> C:\dev\devops-site\backend\src\DevOpsSite.Application\bin\Release\net8.0\DevOpsSite.Application.dll
+D | BuildAll             |   DevOpsSite.Domain.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Domain.Tests\bin\Release\net8.0\DevOpsSite.Domain.Tests.dll
+D | BuildAll             |   DevOpsSite.Adapters -> C:\dev\devops-site\backend\src\DevOpsSite.Adapters\bin\Release\net8.0\DevOpsSite.Adapters.dll
+D | BuildAll             |   DevOpsSite.Contracts.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Contracts.Tests\bin\Release\net8.0\DevOpsSite.Contracts.Tests.dll
+D | BuildAll             |   DevOpsSite.Worker -> C:\dev\devops-site\backend\src\DevOpsSite.Worker\bin\Release\net8.0\DevOpsSite.Worker.dll
+D | BuildAll             |   DevOpsSite.Application.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Application.Tests\bin\Release\net8.0\DevOpsSite.Application.Tests.dll
+D | BuildAll             |   DevOpsSite.Adapters.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Adapters.Tests\bin\Release\net8.0\DevOpsSite.Adapters.Tests.dll
+D | BuildAll             |   DevOpsSite.Host -> C:\dev\devops-site\backend\src\DevOpsSite.Host\bin\Release\net8.0\DevOpsSite.Host.dll
+D | BuildAll             |   DevOpsSite.Worker.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Worker.Tests\bin\Release\net8.0\DevOpsSite.Worker.Tests.dll
+D | BuildAll             |   DevOpsSite.Architecture.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Architecture.Tests\bin\Release\net8.0\DevOpsSite.Architecture.Tests.dll
+D | BuildAll             | 
+D | BuildAll             | Build succeeded.
+D | BuildAll             |     0 Warning(s)
+D | BuildAll             |     0 Error(s)
+D | BuildAll             | 
+D | BuildAll             | Time Elapsed 00:00:01.27
+V | BuildAll             | Telemetry.OnTargetSucceeded (0)
+V | BuildAll             | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | CoverageReport       | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | CoverageReport       | > "C:\Program Files\dotnet\dotnet.exe" test C:\dev\devops-site\backend\DevOpsSite.sln --configuration Release --collect "XPlat Code Coverage" --logger console;verbosity=minimal --no-build --no-restore --results-directory C:\dev\devops-site\backend\artifacts\testresults --settings C:\dev\devops-site\backend\build\coverlet.runsettings
+V | CoverageReport       | @ C:\dev\devops-site\backend
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Contracts.Tests\bin\Release\net8.0\DevOpsSite.Contracts.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Application.Tests\bin\Release\net8.0\DevOpsSite.Application.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Domain.Tests\bin\Release\net8.0\DevOpsSite.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Adapters.Tests\bin\Release\net8.0\DevOpsSite.Adapters.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Architecture.Tests\bin\Release\net8.0\DevOpsSite.Architecture.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | Test run for C:\dev\devops-site\backend\tests\DevOpsSite.Worker.Tests\bin\Release\net8.0\DevOpsSite.Worker.Tests.dll (.NETCoreApp,Version=v8.0)
+D | CoverageReport       | VSTest version 17.11.1 (x64)
+D | CoverageReport       | VSTest version 17.11.1 (x64)
+D | CoverageReport       | 
+D | CoverageReport       | 
+D | CoverageReport       | VSTest version 17.11.1 (x64)
+D | CoverageReport       | VSTest version 17.11.1 (x64)VSTest version 17.11.1 (x64)
+D | CoverageReport       | 
+D | CoverageReport       | 
+D | CoverageReport       | 
+D | CoverageReport       | 
+D | CoverageReport       | VSTest version 17.11.1 (x64)
+D | CoverageReport       | 
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | Starting test execution, please wait...
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | A total of 1 test files matched the specified pattern.
+D | CoverageReport       | No test is available in C:\dev\devops-site\backend\tests\DevOpsSite.Contracts.Tests\bin\Release\net8.0\DevOpsSite.Contracts.Tests.dll. Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate and try again.
+D | CoverageReport       | 
+D | CoverageReport       | Passed!  - Failed:     0, Passed:    78, Skipped:     0, Total:    78, Duration: 87 ms - DevOpsSite.Domain.Tests.dll (net8.0)
+D | CoverageReport       | 
+D | CoverageReport       | 
+D | CoverageReport       | Passed!  - Failed:     0, Passed:    60, Skipped:     0, Total:    60, Duration: 69 ms - DevOpsSite.Application.Tests.dll (net8.0)
+D | CoverageReport       | 
+D | CoverageReport       | Passed!  - Failed:     0, Passed:    46, Skipped:     0, Total:    46, Duration: 68 ms - DevOpsSite.Adapters.Tests.dll (net8.0)
+D | CoverageReport       | 
+D | CoverageReport       | Passed!  - Failed:     0, Passed:    24, Skipped:     0, Total:    24, Duration: 120 ms - DevOpsSite.Architecture.Tests.dll (net8.0)
+D | CoverageReport       | 
+D | CoverageReport       | Passed!  - Failed:     0, Passed:     6, Skipped:     0, Total:     6, Duration: 1 s - DevOpsSite.Worker.Tests.dll (net8.0)
+D | CoverageReport       | 
+D | CoverageReport       | Attachments:
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\85ad43fb-ccf9-407b-b72f-b2838000e388\coverage.cobertura.xml
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\a0d4ecd8-4dd5-4293-a304-4422bb933981\coverage.cobertura.xml
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\452d2b10-b687-469a-8a9e-b271f45a6662\coverage.cobertura.xml
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\ae6f42e0-86ab-40ea-8f29-9c1ae8d43b6a\coverage.cobertura.xml
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\4345c38e-9173-4a21-87e3-56f93910466a\coverage.cobertura.xml
+D | CoverageReport       |   C:\dev\devops-site\backend\artifacts\testresults\50d373f3-f9eb-4e27-8813-ec48de1fbe92\coverage.cobertura.xml
+I | CoverageReport       | Found 6 coverage file(s)
+I | CoverageReport       | > "C:\Program Files\dotnet\dotnet.exe" tool restore
+V | CoverageReport       | @ C:\dev\devops-site\backend
+D | CoverageReport       | Tool 'dotnet-reportgenerator-globaltool' (version '5.4.5') was restored. Available commands: reportgenerator
+D | CoverageReport       | 
+D | CoverageReport       | Restore was successful.
+I | CoverageReport       | > "C:\Program Files\dotnet\dotnet.exe" reportgenerator "-reports:C:\dev\devops-site\backend\artifacts\testresults\4345c38e-9173-4a21-87e3-56f93910466a\coverage.cobertura.xml;C:\dev\devops-site\backend\artifacts\testresults\452d2b10-b687-469a-8a9e-b271f45a6662\coverage.cobertura.xml;C:\dev\devops-site\backend\artifacts\testresults\50d373f3-f9eb-4e27-8813-ec48de1fbe92\coverage.cobertura.xml;C:\dev\devops-site\backend\artifacts\testresults\85ad43fb-ccf9-407b-b72f-b2838000e388\coverage.cobertura.xml;C:\dev\devops-site\backend\artifacts\testresults\a0d4ecd8-4dd5-4293-a304-4422bb933981\coverage.cobertura.xml;C:\dev\devops-site\backend\artifacts\testresults\ae6f42e0-86ab-40ea-8f29-9c1ae8d43b6a\coverage.cobertura.xml" "-targetdir:C:\dev\devops-site\backend\artifacts\coverage\report" "-reporttypes:Cobertura;HtmlSummary;TextSummary" "-verbosity:Warning"
+V | CoverageReport       | @ C:\dev\devops-site\backend
+I | CoverageReport       | 
+I | CoverageReport       |   Summary
+I | CoverageReport       |     Generated on: 3/22/2026 - 11:46:51 AM
+I | CoverageReport       |     Coverage date: 3/22/2026 - 11:46:47 AM - 3/22/2026 - 11:46:50 AM
+I | CoverageReport       |     Parser: MultiReport (6x Cobertura)
+I | CoverageReport       |     Assemblies: 6
+I | CoverageReport       |     Classes: 63
+I | CoverageReport       |     Files: 49
+I | CoverageReport       |     Line coverage: 66.1%
+I | CoverageReport       |     Covered lines: 1092
+I | CoverageReport       |     Uncovered lines: 558
+I | CoverageReport       |     Coverable lines: 1650
+I | CoverageReport       |     Total lines: 3201
+I | CoverageReport       |     Branch coverage: 66.5% (253 of 380)
+I | CoverageReport       |     Covered branches: 253
+I | CoverageReport       |     Total branches: 380
+I | CoverageReport       |     Method coverage: 71.5% (236 of 330)
+I | CoverageReport       |     Full method coverage: 53.3% (176 of 330)
+I | CoverageReport       |     Covered methods: 236
+I | CoverageReport       |     Fully covered methods: 176
+I | CoverageReport       |     Total methods: 330
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Adapters                                                             65.7%
+I | CoverageReport       |     DevOpsSite.Adapters.Configuration.ServiceHealthConfig                            0%
+I | CoverageReport       |     DevOpsSite.Adapters.Configuration.TraceStoreConfig                               0%
+I | CoverageReport       |     DevOpsSite.Adapters.Jira.FakeWorkItemAdapter                                   100%
+I | CoverageReport       |     DevOpsSite.Adapters.Jira.JiraConfig                                              0%
+I | CoverageReport       |     DevOpsSite.Adapters.Jira.JiraWorkItemAdapter                                  95.6%
+I | CoverageReport       |     DevOpsSite.Adapters.ServiceHealth.FakeServiceHealthAdapter                     100%
+I | CoverageReport       |     DevOpsSite.Adapters.ServiceHealth.HttpServiceHealthAdapter                       0%
+I | CoverageReport       |     DevOpsSite.Adapters.Telemetry.FixedClockAdapter                               66.6%
+I | CoverageReport       |     DevOpsSite.Adapters.Telemetry.InMemoryAuditAdapter                               0%
+I | CoverageReport       |     DevOpsSite.Adapters.Telemetry.InMemorySpan                                    94.7%
+I | CoverageReport       |     DevOpsSite.Adapters.Telemetry.InMemoryTelemetryAdapter                        69.5%
+I | CoverageReport       |     DevOpsSite.Adapters.Telemetry.SystemClockAdapter                                 0%
+I | CoverageReport       |     DevOpsSite.Adapters.TraceStore.InMemoryTraceIngestionSourceAdapter            92.3%
+I | CoverageReport       |     DevOpsSite.Adapters.TraceStore.InMemoryTraceStoreAdapter                      88.4%
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Application                                                            79%
+I | CoverageReport       |     DevOpsSite.Application.Audit.AuditEvent                                          0%
+I | CoverageReport       |     DevOpsSite.Application.Authorization.AuthorizationResult                      92.8%
+I | CoverageReport       |     DevOpsSite.Application.Authorization.AuthorizationService                     94.4%
+I | CoverageReport       |     DevOpsSite.Application.Authorization.CapabilityDescriptor                     70.5%
+I | CoverageReport       |     DevOpsSite.Application.Authorization.CapabilityRegistry                       57.1%
+I | CoverageReport       |     DevOpsSite.Application.Authorization.Permission                               81.8%
+I | CoverageReport       |     DevOpsSite.Application.Context.ActorIdentity                                    75%
+I | CoverageReport       |     DevOpsSite.Application.Context.OperationContext                               68.7%
+I | CoverageReport       |     DevOpsSite.Application.Queries.TraceQuery                                     92.3%
+I | CoverageReport       |     DevOpsSite.Application.Results.AppError                                       53.4%
+I | CoverageReport       |     DevOpsSite.Application.Results.Result<T>                                      90.9%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.AddTraceEventsCommand                           50%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.AddTraceEventsHandler                         86.4%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.GetServiceHealthHandler                       96.8%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.GetServiceHealthQuery                           50%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.GetWorkItemHandler                            96.6%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.GetWorkItemQuery                                50%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.IngestTraceEventsCommand                        50%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.IngestTraceEventsHandler                      75.6%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.IngestTraceEventsResult                       66.6%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.QueryTraceEventsHandler                       88.4%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.QueryTraceEventsQuery                         85.7%
+I | CoverageReport       |     DevOpsSite.Application.UseCases.TraceEventInput                               90.9%
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Contracts.Tests                                                      99.5%
+I | CoverageReport       |     AutoGeneratedProgram                                                             0%
+I | CoverageReport       |     DevOpsSite.Contracts.Tests.ServiceHealth.ServiceHealthPortContractTests        100%
+I | CoverageReport       |     DevOpsSite.Contracts.Tests.TraceStore.TraceIngestionSourcePortContractTests    100%
+I | CoverageReport       |     DevOpsSite.Contracts.Tests.TraceStore.TraceStorePortContractTests              100%
+I | CoverageReport       |     DevOpsSite.Contracts.Tests.WorkItem.WorkItemPortContractTests                  100%
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Domain                                                               96.7%
+I | CoverageReport       |     DevOpsSite.Domain.Entities.ServiceHealthSummary                                100%
+I | CoverageReport       |     DevOpsSite.Domain.Entities.TraceEvent                                          100%
+I | CoverageReport       |     DevOpsSite.Domain.Entities.WorkItemSummary                                     100%
+I | CoverageReport       |     DevOpsSite.Domain.ValueObjects.ServiceId                                      87.5%
+I | CoverageReport       |     DevOpsSite.Domain.ValueObjects.TraceEventId                                   87.5%
+I | CoverageReport       |     DevOpsSite.Domain.ValueObjects.TraceEventType                                 87.5%
+I | CoverageReport       |     DevOpsSite.Domain.ValueObjects.WorkItemKey                                    87.5%
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Host                                                                    0%
+I | CoverageReport       |     DevOpsSite.Host.Composition.ServiceRegistration                                  0%
+I | CoverageReport       |     DevOpsSite.Host.Composition.Validator                                            0%
+I | CoverageReport       |     DevOpsSite.Host.Middleware.OperationContextExtensions                            0%
+I | CoverageReport       |     DevOpsSite.Host.Middleware.OperationContextMiddleware                            0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.ResultMapper                                              0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.ServiceHealthRoutes                                       0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.TraceEventRequestItem                                     0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.TraceEventsRequest                                        0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.TraceRoutes                                               0%
+I | CoverageReport       |     DevOpsSite.Host.Routes.WorkItemRoutes                                            0%
+I | CoverageReport       |   
+I | CoverageReport       |   DevOpsSite.Worker                                                               46.3%
+I | CoverageReport       |     DevOpsSite.Worker.Composition.ConfigValidator                                    0%
+I | CoverageReport       |     DevOpsSite.Worker.Composition.WorkerServiceRegistration                          0%
+I | CoverageReport       |     DevOpsSite.Worker.Configuration.TraceIngestionConfig                           100%
+I | CoverageReport       |     DevOpsSite.Worker.Services.TraceIngestionService                              79.2%
+I | CoverageReport       | 
+I | CoverageReport       | ========================================
+I | CoverageReport       |   Coverage: 66.18%
+I | CoverageReport       | ========================================
+I | CoverageReport       | 
+I | CoverageReport       |   artifacts/coverage/merged.cobertura.xml
+I | CoverageReport       |   artifacts/coverage/report/
+V | CoverageReport       | Telemetry.OnTargetSucceeded (0)
+V | CoverageReport       | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V |                      | UpdateNotification.OnBuildFinished (10)
+V |                      | SerializeBuildServerState.OnBuildFinished (0)
+V |                      | EventInvoker.OnBuildFinished (-3.4028235E+38)

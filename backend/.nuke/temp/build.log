@@ -1,0 +1,37 @@
+11:47:01.483 | V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+11:47:01.500 | V |                      | HandleReSharperSurrogateArguments.OnBuildCreated (150)
+11:47:01.500 | V |                      | InjectParameterValues.OnBuildCreated (100)
+11:47:01.522 | V |                      | HandleShellCompletion.OnBuildCreated (75)
+11:47:01.811 | V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+11:47:01.812 | V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+11:47:01.821 | V |                      | UpdateNotification.OnBuildCreated (10)
+11:47:01.821 | V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+11:47:01.825 | V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+11:47:01.826 | V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+11:47:01.842 | V |                      | HandlePlanRequests.OnBuildInitialized (10)
+11:47:01.842 | V |                      | HandleHelpRequests.OnBuildInitialized (5)
+11:47:01.842 | V |                      | Telemetry.OnBuildInitialized (0)
+11:47:02.108 | V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+11:47:02.125 | V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+11:47:02.135 | V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+11:47:02.248 | I | Restore              | > "C:\Program Files\dotnet\dotnet.exe" restore C:\dev\devops-site\backend\DevOpsSite.sln
+11:47:02.252 | V | Restore              | @ C:\dev\devops-site\backend
+11:47:02.760 | D | Restore              |   Determining projects to restore...
+11:47:03.025 | D | Restore              |   All projects are up-to-date for restore.
+11:47:03.075 | V | Restore              | Telemetry.OnTargetSucceeded (0)
+11:47:03.075 | V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+11:47:03.076 | V | BuildProject         | EventInvoker.OnTargetRunning (-3.4028235E+38)
+11:47:03.180 | I | BuildProject         | > "C:\Program Files\dotnet\dotnet.exe" build C:\dev\devops-site\backend\src\DevOpsSite.Domain\DevOpsSite.Domain.csproj --configuration Release --no-restore --nologo
+11:47:03.180 | V | BuildProject         | @ C:\dev\devops-site\backend
+11:47:03.872 | D | BuildProject         |   DevOpsSite.Domain -> C:\dev\devops-site\backend\src\DevOpsSite.Domain\bin\Release\net8.0\DevOpsSite.Domain.dll
+11:47:03.880 | D | BuildProject         | 
+11:47:03.881 | D | BuildProject         | Build succeeded.
+11:47:03.881 | D | BuildProject         |     0 Warning(s)
+11:47:03.881 | D | BuildProject         |     0 Error(s)
+11:47:03.882 | D | BuildProject         | 
+11:47:03.882 | D | BuildProject         | Time Elapsed 00:00:00.53
+11:47:03.916 | V | BuildProject         | Telemetry.OnTargetSucceeded (0)
+11:47:03.916 | V | BuildProject         | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+11:47:03.922 | V |                      | UpdateNotification.OnBuildFinished (10)
+11:47:03.922 | V |                      | SerializeBuildServerState.OnBuildFinished (0)
+11:47:03.922 | V |                      | EventInvoker.OnBuildFinished (-3.4028235E+38)

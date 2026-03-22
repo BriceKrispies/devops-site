@@ -1,0 +1,27 @@
+# Worker container
+# Build: podman build -f Containerfile.worker -t devops-worker .
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Restore dependencies first (layer caching)
+COPY DevOpsSite.sln global.json ./
+COPY src/DevOpsSite.Domain/DevOpsSite.Domain.csproj src/DevOpsSite.Domain/
+COPY src/DevOpsSite.Application/DevOpsSite.Application.csproj src/DevOpsSite.Application/
+COPY src/DevOpsSite.Adapters/DevOpsSite.Adapters.csproj src/DevOpsSite.Adapters/
+COPY src/DevOpsSite.Host/DevOpsSite.Host.csproj src/DevOpsSite.Host/
+COPY src/DevOpsSite.Worker/DevOpsSite.Worker.csproj src/DevOpsSite.Worker/
+RUN dotnet restore src/DevOpsSite.Worker/DevOpsSite.Worker.csproj
+
+# Copy source and publish
+COPY src/ src/
+RUN dotnet publish src/DevOpsSite.Worker/DevOpsSite.Worker.csproj \
+    -c Release \
+    -o /app \
+    --no-restore
+
+# Runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app .
+
+ENTRYPOINT ["dotnet", "DevOpsSite.Worker.dll"]

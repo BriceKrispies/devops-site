@@ -1,0 +1,47 @@
+V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+V |                      | HandleReSharperSurrogateArguments.OnBuildCreated (150)
+V |                      | InjectParameterValues.OnBuildCreated (100)
+V |                      | HandleShellCompletion.OnBuildCreated (75)
+V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+V |                      | UpdateNotification.OnBuildCreated (10)
+V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+V |                      | HandlePlanRequests.OnBuildInitialized (10)
+V |                      | HandleHelpRequests.OnBuildInitialized (5)
+V |                      | Telemetry.OnBuildInitialized (0)
+V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | Restore              | > "C:\Program Files\dotnet\dotnet.exe" restore C:\dev\devops-site\backend\DevOpsSite.sln
+V | Restore              | @ C:\dev\devops-site\backend
+D | Restore              |   Determining projects to restore...
+D | Restore              |   All projects are up-to-date for restore.
+V | Restore              | Telemetry.OnTargetSucceeded (0)
+V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | BuildAll             | EventInvoker.OnTargetRunning (-3.4028235E+38)
+I | BuildAll             | > "C:\Program Files\dotnet\dotnet.exe" build C:\dev\devops-site\backend\DevOpsSite.sln --configuration Release --no-restore --nologo
+V | BuildAll             | @ C:\dev\devops-site\backend
+D | BuildAll             |   DevOpsSite.Domain -> C:\dev\devops-site\backend\src\DevOpsSite.Domain\bin\Release\net8.0\DevOpsSite.Domain.dll
+D | BuildAll             |   DevOpsSite.Domain.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Domain.Tests\bin\Release\net8.0\DevOpsSite.Domain.Tests.dll
+D | BuildAll             |   DevOpsSite.Application -> C:\dev\devops-site\backend\src\DevOpsSite.Application\bin\Release\net8.0\DevOpsSite.Application.dll
+D | BuildAll             |   DevOpsSite.Contracts.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Contracts.Tests\bin\Release\net8.0\DevOpsSite.Contracts.Tests.dll
+D | BuildAll             |   DevOpsSite.Adapters -> C:\dev\devops-site\backend\src\DevOpsSite.Adapters\bin\Release\net8.0\DevOpsSite.Adapters.dll
+D | BuildAll             |   DevOpsSite.Application.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Application.Tests\bin\Release\net8.0\DevOpsSite.Application.Tests.dll
+D | BuildAll             |   DevOpsSite.Adapters.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Adapters.Tests\bin\Release\net8.0\DevOpsSite.Adapters.Tests.dll
+D | BuildAll             |   DevOpsSite.Worker -> C:\dev\devops-site\backend\src\DevOpsSite.Worker\bin\Release\net8.0\DevOpsSite.Worker.dll
+D | BuildAll             |   DevOpsSite.Host -> C:\dev\devops-site\backend\src\DevOpsSite.Host\bin\Release\net8.0\DevOpsSite.Host.dll
+D | BuildAll             |   DevOpsSite.Worker.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Worker.Tests\bin\Release\net8.0\DevOpsSite.Worker.Tests.dll
+D | BuildAll             |   DevOpsSite.Architecture.Tests -> C:\dev\devops-site\backend\tests\DevOpsSite.Architecture.Tests\bin\Release\net8.0\DevOpsSite.Architecture.Tests.dll
+D | BuildAll             | 
+D | BuildAll             | Build succeeded.
+D | BuildAll             |     0 Warning(s)
+D | BuildAll             |     0 Error(s)
+D | BuildAll             | 
+D | BuildAll             | Time Elapsed 00:00:04.71
+V | BuildAll             | Telemetry.OnTargetSucceeded (0)
+V | BuildAll             | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V |                      | UpdateNotification.OnBuildFinished (10)
+V |                      | SerializeBuildServerState.OnBuildFinished (0)
+V |                      | EventInvoker.OnBuildFinished (-3.4028235E+38)

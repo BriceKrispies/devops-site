@@ -1,0 +1,66 @@
+# Local development stack — Podman-compatible compose
+#
+# Start:  podman compose up --build
+# Stop:   podman compose down
+# Logs:   podman compose logs -f
+#
+# Services:
+#   frontend  — http://localhost:8080  (nginx serving static + proxying /api/ to backend)
+#   api       — http://localhost:5000  (backend API, DevelopmentBypass auth)
+#   worker    — background ingestion worker
+#   redis     — http://localhost:6379  (local Redis)
+#
+# Switch persona: change AUTH__ACTIVEPERSONA in the api environment below.
+# Options: viewer, operator, admin
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Containerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Containerfile.api
+    ports:
+      - "5000:5000"
+    environment:
+      DOTNET_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Development
+      Auth__Mode: DevelopmentBypass
+      Auth__ActivePersona: operator
+      TraceStore__Provider: InMemory
+      ServiceHealth__BaseUrl: https://health-api.example.com
+      ServiceHealth__TimeoutMs: "5000"
+      ServiceHealth__MaxRetries: "2"
+      Jira__BaseUrl: https://jira.example.com
+      Jira__CredentialsRef: local-dev-token
+      Jira__TimeoutMs: "10000"
+      Jira__MaxRetries: "2"
+      ConnectionStrings__Redis: redis:6379
+    depends_on:
+      - redis
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Containerfile.worker
+    environment:
+      DOTNET_ENVIRONMENT: Development
+      TraceIngestion__Enabled: "true"
+      TraceIngestion__PollIntervalSeconds: "30"
+      TraceIngestion__MaxBatchSize: "100"
+      TraceStore__Provider: InMemory
+      ConnectionStrings__Redis: redis:6379
+    depends_on:
+      - redis
+
+  redis:
+    image: docker.io/library/redis:7-alpine
+    ports:
+      - "6379:6379"

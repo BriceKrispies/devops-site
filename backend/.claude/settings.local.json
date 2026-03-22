@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /c/dev/devops-site/backend/docs/*.md)",
+      "Bash(dotnet --version)",
+      "Bash(dotnet --list-sdks)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet add:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(chmod:*)",
+      "Bash(bash scaffolds/scaffold.sh capability TestScaffold 2>&1)",
+      "Bash(dotnet tool:*)",
+      "Bash(bash scripts/ci.sh 2>&1)",
+      "Bash(dotnet run:*)",
+      "Bash(rm .nuke)",
+      "Bash(mkdir -p .nuke)"
+    ]
+  }
+}

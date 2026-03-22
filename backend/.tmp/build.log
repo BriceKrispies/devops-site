@@ -1,0 +1,4 @@
+11:39:25.078 | V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+11:39:25.090 | V |                      | HandleReSharperSurrogateArguments.OnBuildCreated (150)
+11:39:25.090 | V |                      | InjectParameterValues.OnBuildCreated (100)
+11:39:25.100 | V |                      | HandleShellCompletion.OnBuildCreated (75)
