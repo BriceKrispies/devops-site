@@ -83,6 +83,10 @@ export function htmlPartialsPlugin(): Plugin {
         // Remove the page directive comment from the output
         html = html.replace(PAGE_RE, "");
 
+        // --- Inject data-page on <body> ---
+
+        html = html.replace(/<body([\s>])/, `<body data-page="${meta.nav}"$1`);
+
         // --- Compute current file's directory relative to root ---
 
         const currentFileDir = relative(root, dirname(filename));

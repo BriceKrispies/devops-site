@@ -22,7 +22,7 @@ function renderEntityIds(ids: Record<string, string>): string {
 
 export function renderTrace(events: TraceEvent[]): string {
   return `<ol class="trace-timeline">${events.map((e) =>
-    `<li class="trace-entry trace-entry--${e.source}">
+    `<li class="trace-entry trace-entry--${e.source}" data-feature="${e.id}">
       <span class="trace-time">${formatTime(e.timestamp)}</span>
       <span class="trace-source trace-source--${e.source}">${SOURCE_LABELS[e.source] ?? e.source}</span>
       <span class="trace-type">${e.type}</span>

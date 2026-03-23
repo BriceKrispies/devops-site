@@ -2,7 +2,7 @@ import type { Job } from "../../types/models";
 
 export function renderJobs(jobs: Job[]): string {
   return `<ul class="job-list">${jobs.map((j) =>
-    `<li class="job-item">
+    `<li class="job-item" data-feature="${j.id}" data-status="${j.status}">
       <div class="job-header">
         <span class="job-status job-status--${j.status}"></span>
         <span class="job-name">${j.name}</span>
