@@ -1,10 +1,12 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import { htmlPartialsPlugin } from "./vite-plugin-partials";
 
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "./" : "/",
   root: ".",
   publicDir: "public",
+  plugins: [htmlPartialsPlugin()],
   build: {
     outDir: "dist",
     rollupOptions: {
