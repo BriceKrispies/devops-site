@@ -27,11 +27,16 @@ public sealed record AuthorizationResult
     public static AuthorizationResult MissingDescriptor(string operationName) =>
         new(false, AuthorizationFailureReason.MissingDescriptor,
             $"No authorization descriptor registered for capability '{operationName}'. Deny by default.");
+
+    public static AuthorizationResult KillSwitched(string operationName, string? reason = null) =>
+        new(false, AuthorizationFailureReason.KillSwitchActive,
+            reason ?? $"Capability '{operationName}' has been emergency-disabled by kill switch.");
 }
 
 public enum AuthorizationFailureReason
 {
     Unauthenticated,
     Forbidden,
-    MissingDescriptor
+    MissingDescriptor,
+    KillSwitchActive
 }

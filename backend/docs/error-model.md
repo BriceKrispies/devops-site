@@ -98,17 +98,78 @@ Failed spans include:
 - `capability.errors` counter incremented with labels `operationName`, `errorCode`
 - `external.calls` counter with `result: failure`
 
-### In API Responses
+### In API Responses — Standardized Error Contract
+
+All non-success API responses use the `ApiErrorResponse` contract:
 
 ```json
 {
-  "ok": false,
-  "error": {
-    "code": "NOT_FOUND",
-    "message": "Job with ID job-456 not found"
+  "code": "NOT_FOUND",
+  "message": "Job with ID job-456 not found",
+  "correlationId": "a1b2c3d4e5f6"
+}
+```
+
+For validation errors, field-level detail may be included:
+
+```json
+{
+  "code": "VALIDATION",
+  "message": "Input validation failed.",
+  "correlationId": "a1b2c3d4e5f6",
+  "fieldErrors": {
+    "serviceId": "Must not be empty",
+    "from": "Must be before 'to' date"
   }
 }
 ```
+
+**Contract fields:**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `code` | string | yes | Stable machine-readable error code (SCREAMING_SNAKE_CASE) |
+| `message` | string | yes | Safe user-facing message — never contains stack traces or internal details |
+| `correlationId` | string | yes | Request correlation ID for cross-referencing backend logs |
+| `details` | string | no | Optional safe details when additional context is appropriate |
+| `fieldErrors` | object | no | Field-level validation errors: `{ fieldName: message }` |
+
+**Stable error codes:**
+
+| Code | HTTP Status | Description |
+|---|---|---|
+| `VALIDATION` | 400 | Input fails schema or business validation |
+| `UNAUTHENTICATED` | 401 | No authenticated actor present |
+| `FORBIDDEN` | 403 | Authenticated but missing required permission |
+| `NOT_FOUND` | 404 | Requested resource does not exist |
+| `CONFLICT` | 409 | Operation conflicts with current state |
+| `RATE_LIMITED` | 429 | Caller exceeded rate limit |
+| `DEPENDENCY_UNAVAILABLE` | 502 | External system unreachable |
+| `TIMEOUT` | 502 | Operation or dependency exceeded deadline |
+| `TRANSIENT_FAILURE` | 502 | External system returned retriable error |
+| `PERMANENT_FAILURE` | 502 | External system returned non-retriable error |
+| `INTERNAL_ERROR` | 500/502 | Unhandled exception or invariant violation |
+| `KILL_SWITCH_ACTIVE` | 503 | Capability disabled via kill switch |
+
+## Correlation ID
+
+Every HTTP request carries a correlation ID:
+
+1. The `OperationContextMiddleware` extracts the `X-Correlation-Id` request header or generates a new UUID.
+2. The ID is stored in `OperationContext.CorrelationId`.
+3. The ID is returned in the `X-Correlation-Id` response header on **every** response.
+4. The ID is included in the `correlationId` field of **every** error response body.
+5. The ID is included in **every** structured log entry for the request.
+
+This makes it possible to trace any frontend-visible error back to the corresponding backend log entries.
+
+## Global Exception Handler
+
+The `ExceptionHandlerMiddleware` catches all unhandled exceptions at the top of the middleware pipeline:
+
+- Logs rich context: exception type, stack trace, route, actor, correlation ID
+- Returns a sanitized `INTERNAL_ERROR` response — never exposes stack traces or internal messages
+- Handles client disconnection (`OperationCanceledException`) gracefully with HTTP 499
 
 ### Authorization Error HTTP Mapping (Constitution §14)
 
@@ -141,11 +202,13 @@ Both use `ErrorCode.Authorization`. The host `ResultMapper` distinguishes 401 vs
 If a new category is genuinely needed:
 
 1. Propose it with rationale
-2. Add it to this document
-3. Update the `ErrorCode` type
-4. Update metric labels
-5. Update log schema
-6. Update API response documentation
+2. Add it to this document (taxonomy table + stable code table)
+3. Add the value to the `ErrorCode` enum in `Application/Errors/ErrorCode.cs`
+4. Add a factory method on `AppError` in `Application/Results/AppError.cs`
+5. Add the stable string code mapping in `ResultMapper.ToErrorCode()` in `Host/Routes/ResultMapper.cs`
+6. Add the HTTP status mapping in `ResultMapper.ToStatusCode()`
+7. Update metric labels and log schema
+8. Update the frontend `mapCodeToKind()` in `adapters/api-client.ts`
 
 ## Enforcement
 

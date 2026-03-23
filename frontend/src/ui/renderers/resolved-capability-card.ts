@@ -1,0 +1,76 @@
+import type { ResolvedCapability, ResolvedStatus } from "../../capabilities/resolved-types";
+
+function escapeAttr(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function escapeHtml(str: string): string {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+const STATUS_LABELS: Record<ResolvedStatus, string> = {
+  enabled: "Ready",
+  disabled: "Disabled",
+  hidden: "Hidden",
+  read_only: "Read Only",
+  degraded: "Degraded",
+};
+
+const STATUS_CSS: Record<ResolvedStatus, string> = {
+  enabled: "cap-card--ready",
+  disabled: "cap-card--disabled",
+  hidden: "cap-card--disabled",
+  read_only: "cap-card--read-only",
+  degraded: "cap-card--stub",
+};
+
+function renderResolvedStatusBadge(status: ResolvedStatus): string {
+  return `<span class="cap-status cap-status--${status}">${STATUS_LABELS[status]}</span>`;
+}
+
+function renderRiskBadge(risk: string): string {
+  return `<span class="cap-risk cap-risk--${escapeHtml(risk)}">${escapeHtml(risk.charAt(0).toUpperCase() + risk.slice(1))}</span>`;
+}
+
+function renderSingleResolvedCard(cap: ResolvedCapability): string {
+  const isNavigable = cap.status === "enabled" && cap.route;
+  const tag = isNavigable ? "a" : "div";
+  const href = isNavigable ? ` href="${escapeAttr(cap.route!)}"` : "";
+  const statusClass = STATUS_CSS[cap.status] ?? "cap-card--disabled";
+  const riskClass = cap.risk !== "low" ? ` cap-card--risk-${escapeAttr(cap.risk)}` : "";
+
+  const messageHtml = cap.message && cap.status !== "enabled"
+    ? `<p class="cap-card-message">${escapeHtml(cap.message)}</p>`
+    : "";
+
+  return `<${tag} class="cap-card ${statusClass}${riskClass}"${href}>
+    <div class="cap-card-header">
+      <span class="cap-card-name">${escapeHtml(cap.name)}</span>
+      <div class="cap-card-badges">
+        ${cap.risk !== "low" ? renderRiskBadge(cap.risk) : ""}
+        ${renderResolvedStatusBadge(cap.status)}
+      </div>
+    </div>
+    <p class="cap-card-desc">${escapeHtml(cap.description)}</p>
+    ${messageHtml}
+    ${cap.permissions.length > 0
+      ? `<div class="cap-card-perms">${cap.permissions.map((p) => `<span class="cap-perm">${escapeHtml(p)}</span>`).join("")}</div>`
+      : ""}
+  </${tag}>`;
+}
+
+/**
+ * Render resolved capabilities as a card grid.
+ * Uses the full resolved status model for richer display.
+ */
+export function renderResolvedCapabilityCards(capabilities: ResolvedCapability[]): string {
+  // Filter out hidden capabilities
+  const visible = capabilities.filter((c) => c.status !== "hidden");
+
+  if (visible.length === 0) {
+    return `<div class="region-empty"><p>No capabilities available in this area.</p></div>`;
+  }
+  return `<div class="cap-grid">${visible.map(renderSingleResolvedCard).join("")}</div>`;
+}

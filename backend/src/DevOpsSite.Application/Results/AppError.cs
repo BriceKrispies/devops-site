@@ -14,6 +14,7 @@ public sealed record AppError
     public required string CorrelationId { get; init; }
     public string? Dependency { get; init; }
     public Exception? Cause { get; init; }
+    public IReadOnlyDictionary<string, string>? FieldErrors { get; init; }
 
     public static AppError Unauthenticated(string message, string operationName, string correlationId) =>
         new()
@@ -111,5 +112,26 @@ public sealed record AppError
             Severity = Severity.Fatal,
             OperationName = operationName,
             CorrelationId = correlationId
+        };
+
+    public static AppError Conflict(string message, string operationName, string correlationId) =>
+        new()
+        {
+            Code = ErrorCode.Conflict,
+            Message = message,
+            Severity = Severity.Warn,
+            OperationName = operationName,
+            CorrelationId = correlationId
+        };
+
+    public static AppError ValidationWithFields(string message, string operationName, string correlationId, IReadOnlyDictionary<string, string> fieldErrors) =>
+        new()
+        {
+            Code = ErrorCode.Validation,
+            Message = message,
+            Severity = Severity.Warn,
+            OperationName = operationName,
+            CorrelationId = correlationId,
+            FieldErrors = fieldErrors
         };
 }

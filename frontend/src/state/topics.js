@@ -5,4 +5,5 @@ export const TOPICS = {
     TRACE_QUERY: "trace.query",
     TRACE_RESULTS: "trace.results",
     TRACE_DATA: "trace.data",
+    CAPABILITIES: "capabilities.catalog",
 };

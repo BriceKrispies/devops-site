@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /dev/devops-site/frontend -type f -name *.md -o -name *.json -o -name *.config.* -o -name *.env*)",
+      "Bash(ls -la /c/dev/devops-site/backend/src/DevOpsSite.*/)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx|js|json|md\\)$\")",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

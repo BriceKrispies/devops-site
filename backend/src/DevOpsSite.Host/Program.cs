@@ -14,6 +14,10 @@ var app = builder.Build();
 // Also validates the DevelopmentBypass guard (§13.5)
 app.Services.ValidateCapabilityRegistry();
 
+// Global exception handler — outermost middleware, catches all unhandled exceptions
+// and returns sanitized ApiErrorResponse. Must be registered before all other middleware.
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 // CORS for local development (frontend on different port)
 app.UseCors(policy => policy
     .AllowAnyOrigin()
@@ -34,5 +38,6 @@ if (AuthMode.IsDevelopmentBypass(authConfig.Mode))
 app.MapServiceHealthRoutes();
 app.MapWorkItemRoutes();
 app.MapTraceRoutes();
+app.MapCapabilitiesRoutes();
 
 app.Run();

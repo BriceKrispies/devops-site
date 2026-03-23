@@ -1,6 +1,7 @@
 import type { Store, Unsubscribe } from "../../state/store.types";
 import type { TopicPayload } from "../../state/topics";
 import type { RegionState, RenderFn } from "./region.types";
+import { renderError, renderSimpleError } from "../renderers/error";
 
 function setRegionState(el: HTMLElement, state: RegionState): void {
   el.dataset.state = state;
@@ -28,8 +29,13 @@ export function bindRegion<T>(
   return store.subscribe<TopicPayload<T[]>>(topic, (payload) => {
     if (payload.status === "error") {
       setRegionState(el, "error");
-      content.innerHTML =
-        `<div class="region-error"><p>${escapeHtml(payload.error ?? "An error occurred")}</p></div>`;
+      if (payload.normalizedError) {
+        content.innerHTML = renderError(payload.normalizedError);
+      } else {
+        content.innerHTML = renderSimpleError(
+          payload.error ?? "An error occurred",
+        );
+      }
     } else if (!payload.data || payload.data.length === 0) {
       setRegionState(el, "empty");
       content.innerHTML =

@@ -1,3 +1,4 @@
+using DevOpsSite.Adapters.Capabilities;
 using DevOpsSite.Adapters.Configuration;
 using DevOpsSite.Adapters.Jira;
 using DevOpsSite.Adapters.ServiceHealth;
@@ -72,6 +73,9 @@ public static class ServiceRegistration
         // Ingestion source — Constitution §10: default in-memory for local dev
         services.AddSingleton<ITraceIngestionSourcePort, InMemoryTraceIngestionSourceAdapter>();
 
+        // Capability override store — for kill switches and runtime overrides
+        services.AddSingleton<ICapabilityOverrideStore, InMemoryCapabilityOverrideStore>();
+
         // Authorization — Constitution §14: Deny by default
         var registry = new CapabilityRegistry();
         registry.Register(GetServiceHealthHandler.Descriptor);
@@ -80,7 +84,13 @@ public static class ServiceRegistration
         registry.Register(QueryTraceEventsHandler.Descriptor);
         registry.Register(IngestTraceEventsHandler.Descriptor);
         services.AddSingleton(registry);
-        services.AddSingleton<IAuthorizationService, AuthorizationService>();
+        services.AddSingleton<IAuthorizationService>(sp =>
+            new AuthorizationService(
+                sp.GetRequiredService<CapabilityRegistry>(),
+                sp.GetRequiredService<ICapabilityOverrideStore>()));
+
+        // Capability resolution — resolves status for all capabilities per user/context
+        services.AddSingleton<ICapabilityResolutionService, CapabilityResolutionService>();
 
         // Use cases
         services.AddScoped<GetServiceHealthHandler>();

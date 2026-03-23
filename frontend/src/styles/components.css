@@ -677,6 +677,28 @@
     opacity: 0.4;
   }
 
+  .cap-card--read-only {
+    border-left: 2px solid var(--color-accent-blue);
+    opacity: 0.7;
+  }
+
+  .cap-card--read-only .cap-card-name::after {
+    content: " (read only)";
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-muted);
+  }
+
+  /* ── Capability status message ── */
+  .cap-card-message {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: var(--line-height-base);
+    padding-top: var(--space-1);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
   /* ── Card risk highlights ── */
   .cap-card--risk-high .cap-card-name::before {
     content: "";
@@ -740,6 +762,26 @@
     background: rgba(212, 84, 84, 0.1);
   }
 
+  .cap-status--enabled {
+    color: var(--color-status-passing);
+    background: rgba(47, 170, 111, 0.1);
+  }
+
+  .cap-status--read_only {
+    color: var(--color-accent-blue);
+    background: rgba(74, 144, 217, 0.1);
+  }
+
+  .cap-status--degraded {
+    color: var(--color-status-pending);
+    background: rgba(201, 154, 46, 0.1);
+  }
+
+  .cap-status--hidden {
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+  }
+
   /* ── Risk badges ── */
   .cap-risk {
     font-size: 0.5625rem;
@@ -768,6 +810,103 @@
   .cap-risk--critical {
     color: var(--color-accent-red);
     background: rgba(212, 84, 84, 0.1);
+  }
+
+  /* ── Error banners ── */
+  .error-banner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    border-left: 2px solid var(--color-status-failing);
+    background: var(--color-bg-secondary);
+  }
+
+  .error-banner--validation {
+    border-left-color: var(--color-accent-yellow);
+  }
+
+  .error-banner--permission {
+    border-left-color: var(--color-accent-red);
+  }
+
+  .error-banner--unavailable,
+  .error-banner--rate-limited {
+    border-left-color: var(--color-accent-yellow);
+  }
+
+  .error-banner--not-found {
+    border-left-color: var(--color-text-muted);
+  }
+
+  .error-banner--conflict {
+    border-left-color: var(--color-accent-purple);
+  }
+
+  .error-banner-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .error-banner-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .error-correlation {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-family-mono);
+    color: var(--color-text-muted);
+  }
+
+  .error-correlation code {
+    color: var(--color-text-secondary);
+  }
+
+  .error-banner-message {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-base);
+  }
+
+  .error-field-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-2) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .error-field-list strong {
+    font-family: var(--font-family-mono);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .error-retry-btn {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--easing-default),
+                border-color var(--duration-fast) var(--easing-default);
+  }
+
+  .error-retry-btn:hover {
+    background: var(--color-bg-surface);
+    border-color: var(--color-border-hard);
   }
 
   /* ── Area landing region state ── */

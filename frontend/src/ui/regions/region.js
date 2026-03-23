@@ -1,3 +1,4 @@
+import { renderError, renderSimpleError } from "../renderers/error";
 function setRegionState(el, state) {
     el.dataset.state = state;
 }
@@ -15,8 +16,12 @@ export function bindRegion(el, store, topic, render, emptyMessage = "No data ava
     return store.subscribe(topic, (payload) => {
         if (payload.status === "error") {
             setRegionState(el, "error");
-            content.innerHTML =
-                `<div class="region-error"><p>${escapeHtml(payload.error ?? "An error occurred")}</p></div>`;
+            if (payload.normalizedError) {
+                content.innerHTML = renderError(payload.normalizedError);
+            }
+            else {
+                content.innerHTML = renderSimpleError(payload.error ?? "An error occurred");
+            }
         }
         else if (!payload.data || payload.data.length === 0) {
             setRegionState(el, "empty");
