@@ -26,15 +26,21 @@ app.UseCors(policy => policy
 
 app.UseMiddleware<OperationContextMiddleware>();
 
-// Dev auth middleware: injects local persona identity.
-// Only active when Auth:Mode is "DevelopmentBypass".
-// The startup guard above already verified this is only in Development.
+// Auth middleware: resolves identity + permissions.
+// DevelopmentBypass → local persona injection.
+// Oidc → JWT bearer validation + DynamoDB user lookup.
 var authConfig = app.Services.GetRequiredService<AuthConfig>();
 if (AuthMode.IsDevelopmentBypass(authConfig.Mode))
 {
     app.UseMiddleware<DevelopmentAuthMiddleware>();
 }
+else if (string.Equals(authConfig.Mode, AuthMode.Oidc, StringComparison.OrdinalIgnoreCase))
+{
+    app.UseAuthentication();
+    app.UseMiddleware<OidcAuthMiddleware>();
+}
 
+app.MapAuthRoutes();
 app.MapServiceHealthRoutes();
 app.MapWorkItemRoutes();
 app.MapTraceRoutes();

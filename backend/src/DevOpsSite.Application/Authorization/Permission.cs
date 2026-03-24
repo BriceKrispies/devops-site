@@ -38,5 +38,9 @@ public sealed record Permission
 
         // Logs — planned (future CloudWatch)
         public static readonly Permission LogsRead = Create("logs:read");
+
+        // Admin — user and role management
+        public static readonly Permission AdminUsers = Create("admin:users");
+        public static readonly Permission AdminRoles = Create("admin:roles");
     }
 }

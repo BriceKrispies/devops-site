@@ -18,6 +18,8 @@ export default defineConfig({
         logs: resolve(__dirname, "src/pages/logs.html"),
         operations: resolve(__dirname, "src/pages/operations.html"),
         admin: resolve(__dirname, "src/pages/admin.html"),
+        login: resolve(__dirname, "src/pages/login.html"),
+        callback: resolve(__dirname, "src/pages/callback.html"),
       },
     },
   },

@@ -4,7 +4,7 @@ import type { TopicPayload } from "../../state/topics";
 import type { ResolvedCapability, CapabilitiesResponse } from "../../capabilities/resolved-types";
 import type { CapabilityShell } from "../../capabilities/types";
 import { TOPICS } from "../../state/topics";
-import { apiFetch } from "../api-client";
+import { authApiFetch } from "../auth-api-client";
 import { loadCapabilities, setCapabilitiesError, toCapabilityShells } from "../../capabilities/capability-client";
 
 let abortController: AbortController | null = null;
@@ -31,7 +31,7 @@ export const realCapabilitiesAdapter: DataAdapter = {
 };
 
 async function fetchCapabilities(store: Store, signal: AbortSignal): Promise<void> {
-  const result = await apiFetch<CapabilitiesResponse>("/api/capabilities", { signal });
+  const result = await authApiFetch<CapabilitiesResponse>("/api/capabilities", { signal });
 
   if (signal.aborted) return;
 

@@ -20,6 +20,24 @@ public sealed class AuthConfig
     /// Must match a key in the Personas dictionary.
     /// </summary>
     public string ActivePersona { get; set; } = "viewer";
+
+    /// <summary>
+    /// OIDC Authority URL (e.g., Cognito issuer).
+    /// Required when Mode is "Oidc".
+    /// </summary>
+    public string? Authority { get; set; }
+
+    /// <summary>
+    /// OIDC Client ID for the application.
+    /// Required when Mode is "Oidc".
+    /// </summary>
+    public string? ClientId { get; set; }
+
+    /// <summary>
+    /// Valid audiences for JWT validation.
+    /// If not set, defaults to ClientId.
+    /// </summary>
+    public string[]? ValidAudiences { get; set; }
 }
 
 /// <summary>

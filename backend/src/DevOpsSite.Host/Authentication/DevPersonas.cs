@@ -52,7 +52,10 @@ public static class DevPersonas
                 Permission.WellKnown.QueuesOperate,
                 Permission.WellKnown.DatabasesRead,
                 Permission.WellKnown.DatabasesOperate,
-                Permission.WellKnown.LogsRead
+                Permission.WellKnown.LogsRead,
+                // Admin capabilities
+                Permission.WellKnown.AdminUsers,
+                Permission.WellKnown.AdminRoles
             }
         }
     };

@@ -47,7 +47,9 @@ public sealed class DevelopmentAuthGuardTests
     [Fact]
     public void Oidc_mode_does_not_trigger_guard_in_Production()
     {
-        var services = BuildServicesWithAuth("Oidc", "viewer", "Production");
+        var services = BuildServicesWithAuth("Oidc", "viewer", "Production",
+            oidcAuthority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_test",
+            oidcClientId: "test-client");
         var provider = services.BuildServiceProvider();
 
         // Should not throw — Oidc mode is allowed everywhere
@@ -206,22 +208,36 @@ public sealed class DevelopmentAuthGuardTests
 
     // --- Helper: builds a minimal service collection with auth config ---
 
-    private static IServiceCollection BuildServicesWithAuth(string mode, string persona, string environmentName)
+    private static IServiceCollection BuildServicesWithAuth(
+        string mode, string persona, string environmentName,
+        string? oidcAuthority = null, string? oidcClientId = null)
     {
+        var configDict = new Dictionary<string, string?>
+        {
+            ["Auth:Mode"] = mode,
+            ["Auth:ActivePersona"] = persona,
+            ["ServiceHealth:BaseUrl"] = "https://health-api.example.com",
+            ["ServiceHealth:TimeoutMs"] = "5000",
+            ["ServiceHealth:MaxRetries"] = "2",
+            ["Jira:BaseUrl"] = "https://jira.example.com",
+            ["Jira:CredentialsRef"] = "test-token",
+            ["Jira:TimeoutMs"] = "10000",
+            ["Jira:MaxRetries"] = "2",
+            ["TraceStore:Provider"] = "InMemory"
+        };
+
+        if (oidcAuthority is not null)
+        {
+            configDict["Auth:Authority"] = oidcAuthority;
+            configDict["DynamoDb:UsersTableName"] = "test-users";
+            configDict["DynamoDb:RolesTableName"] = "test-roles";
+            configDict["DynamoDb:Region"] = "us-east-1";
+        }
+        if (oidcClientId is not null)
+            configDict["Auth:ClientId"] = oidcClientId;
+
         var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                ["Auth:Mode"] = mode,
-                ["Auth:ActivePersona"] = persona,
-                ["ServiceHealth:BaseUrl"] = "https://health-api.example.com",
-                ["ServiceHealth:TimeoutMs"] = "5000",
-                ["ServiceHealth:MaxRetries"] = "2",
-                ["Jira:BaseUrl"] = "https://jira.example.com",
-                ["Jira:CredentialsRef"] = "test-token",
-                ["Jira:TimeoutMs"] = "10000",
-                ["Jira:MaxRetries"] = "2",
-                ["TraceStore:Provider"] = "InMemory"
-            })
+            .AddInMemoryCollection(configDict)
             .Build();
 
         var services = new ServiceCollection();

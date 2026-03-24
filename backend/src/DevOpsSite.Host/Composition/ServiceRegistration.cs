@@ -1,5 +1,7 @@
+using Amazon.DynamoDBv2;
 using DevOpsSite.Adapters.Capabilities;
 using DevOpsSite.Adapters.Configuration;
+using DevOpsSite.Adapters.DynamoDb;
 using DevOpsSite.Adapters.Jira;
 using DevOpsSite.Adapters.ServiceHealth;
 using DevOpsSite.Adapters.Telemetry;
@@ -8,6 +10,7 @@ using DevOpsSite.Application.Authorization;
 using DevOpsSite.Application.Ports;
 using DevOpsSite.Application.UseCases;
 using DevOpsSite.Host.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace DevOpsSite.Host.Composition;
 
@@ -24,6 +27,43 @@ public static class ServiceRegistration
         configuration.GetSection("Auth").Bind(authConfig);
         Validator.ValidateConfig(authConfig);
         services.AddSingleton(authConfig);
+
+        // OIDC mode: wire DynamoDB user resolution + JWT bearer auth
+        if (string.Equals(authConfig.Mode, AuthMode.Oidc, StringComparison.OrdinalIgnoreCase))
+        {
+            if (string.IsNullOrWhiteSpace(authConfig.Authority))
+                throw new InvalidOperationException("Auth:Authority is required when Auth:Mode is 'Oidc'.");
+            if (string.IsNullOrWhiteSpace(authConfig.ClientId))
+                throw new InvalidOperationException("Auth:ClientId is required when Auth:Mode is 'Oidc'.");
+
+            // DynamoDB config for shared user/role tables
+            var dynamoConfig = new DynamoDbConfig();
+            configuration.GetSection("DynamoDb").Bind(dynamoConfig);
+            Validator.ValidateConfig(dynamoConfig);
+            services.AddSingleton(dynamoConfig);
+
+            // DynamoDB client
+            services.AddSingleton<IAmazonDynamoDB>(_ =>
+                new AmazonDynamoDBClient(Amazon.RegionEndpoint.GetBySystemName(dynamoConfig.Region)));
+
+            // User resolution port → DynamoDB adapter
+            services.AddSingleton<IUserResolutionPort, DynamoDbUserResolutionAdapter>();
+
+            // JWT bearer authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = authConfig.Authority;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authConfig.Authority,
+                        ValidateAudience = true,
+                        ValidAudiences = authConfig.ValidAudiences ?? [authConfig.ClientId],
+                        ValidateLifetime = true
+                    };
+                });
+        }
 
         // Typed config — Constitution §11
         var healthConfig = new ServiceHealthConfig();
