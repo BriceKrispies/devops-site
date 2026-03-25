@@ -3,6 +3,7 @@ import { resolve, relative, dirname } from "path";
 import type { Plugin } from "vite";
 
 const VALID_NAV_VALUES = [
+  "callback",
   "login",
   "dashboard",
   "trace",
