@@ -6,4 +6,5 @@ export const TOPICS = {
     TRACE_RESULTS: "trace.results",
     TRACE_DATA: "trace.data",
     CAPABILITIES: "capabilities.catalog",
+    RESOLVED_CAPABILITIES: "capabilities.resolved",
 };

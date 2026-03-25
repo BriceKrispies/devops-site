@@ -1,62 +1,91 @@
 @layer tokens {
   :root {
-    /* Color — backgrounds */
-    --color-bg-primary: #0c0e12;
-    --color-bg-secondary: #12151b;
-    --color-bg-surface: #171b22;
-    --color-bg-elevated: #1e222b;
-    --color-bg-inset: #0a0c0f;
+    /* ═══════════════════════════════════════════
+       High-Contrast Light Theme
+       ═══════════════════════════════════════════
+       White base. Near-black text. Strong status colors.
+       Structure via borders + shadows, not color flooding. */
 
-    /* Color — text */
-    --color-text-primary: #cdd1db;
-    --color-text-secondary: #737985;
-    --color-text-muted: #464b55;
-    --color-text-bright: #eef0f5;
+    /* Color — backgrounds
+       Pure white main. Cool gray for sidebar/topbar/headers.
+       Cards are white, separated by borders and subtle shadow. */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f4f5f8;
+    --color-bg-surface: #ffffff;
+    --color-bg-elevated: #eef0f4;
+    --color-bg-inset: #e8eaef;
 
-    /* Color — borders */
-    --color-border-default: #232830;
-    --color-border-subtle: #1a1e25;
-    --color-border-hard: #2e333d;
+    /* Color — text
+       Near-black primary. Wide gap to secondary.
+       Muted is still clearly legible on white. */
+    --color-text-primary: #1a1d26;
+    --color-text-secondary: #545b6e;
+    --color-text-muted: #848c9e;
+    --color-text-bright: #0c0e14;
 
-    /* Color — accents (status + interaction only) */
-    --color-accent-blue: #4a90d9;
-    --color-accent-green: #2faa6f;
-    --color-accent-red: #d45454;
-    --color-accent-yellow: #c99a2e;
-    --color-accent-purple: #8a7abf;
+    /* Color — borders
+       Visible against white. Hard borders frame sections. */
+    --color-border-default: #d4d8e0;
+    --color-border-subtle: #e2e5eb;
+    --color-border-hard: #bfc4d0;
+
+    /* Color — status (STRONG + SATURATED for white backgrounds)
+       Darkened compared to dark-theme neons so they contrast on white. */
+    --color-accent-green: #0e8c4a;
+    --color-accent-red: #d42a2a;
+    --color-accent-yellow: #a67b00;
+    --color-accent-blue: #2570c2;
+    --color-accent-cyan: #0c7f94;
+    --color-accent-purple: #7248b8;
 
     /* Color — semantic status */
     --color-status-passing: var(--color-accent-green);
     --color-status-failing: var(--color-accent-red);
     --color-status-pending: var(--color-accent-yellow);
+    --color-status-running: var(--color-accent-cyan);
     --color-status-unknown: var(--color-text-muted);
 
+    /* Color — status emphasis (no glows on light — use solid rings instead) */
+    --glow-green: 0 0 0 2px rgba(14, 140, 74, 0.2);
+    --glow-red: 0 0 0 2px rgba(212, 42, 42, 0.2);
+    --glow-yellow: 0 0 0 2px rgba(166, 123, 0, 0.2);
+    --glow-blue: 0 0 0 2px rgba(37, 112, 194, 0.2);
+    --glow-cyan: 0 0 0 2px rgba(12, 127, 148, 0.2);
+
+    /* Color — status tints (badge/row backgrounds — visible on white) */
+    --tint-green: rgba(14, 140, 74, 0.08);
+    --tint-red: rgba(212, 42, 42, 0.07);
+    --tint-yellow: rgba(166, 123, 0, 0.07);
+    --tint-blue: rgba(37, 112, 194, 0.07);
+    --tint-cyan: rgba(12, 127, 148, 0.07);
+    --tint-purple: rgba(114, 72, 184, 0.07);
+
     /* Spacing */
-    --space-1: 0.125rem;
-    --space-2: 0.25rem;
-    --space-3: 0.5rem;
-    --space-4: 0.75rem;
-    --space-5: 1rem;
-    --space-6: 1.5rem;
-    --space-7: 2rem;
-    --space-8: 3rem;
+    --space-1: 0.1875rem;  /* 3px */
+    --space-2: 0.375rem;   /* 6px */
+    --space-3: 0.625rem;   /* 10px */
+    --space-4: 1rem;        /* 16px */
+    --space-5: 1.25rem;     /* 20px */
+    --space-6: 2rem;        /* 32px */
+    --space-7: 2.5rem;      /* 40px */
+    --space-8: 4rem;        /* 64px */
 
     /* Border radius */
-    --radius-sm: 2px;
-    --radius-md: 3px;
-    --radius-lg: 4px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
 
     /* Typography */
     --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-family-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
-    --font-size-xs: 0.6875rem;
-    --font-size-sm: 0.8125rem;
-    --font-size-base: 0.875rem;
-    --font-size-lg: 1rem;
-    --font-size-xl: 1.125rem;
-    --font-size-2xl: 1.25rem;
-    --font-size-3xl: 1.5rem;
+    --font-size-xs: 0.8125rem;   /* 13px */
+    --font-size-sm: 0.875rem;    /* 14px */
+    --font-size-base: 1rem;      /* 16px */
+    --font-size-lg: 1.25rem;     /* 20px */
+    --font-size-xl: 1.375rem;    /* 22px */
+    --font-size-2xl: 1.5rem;     /* 24px */
+    --font-size-3xl: 1.875rem;   /* 30px */
 
     --font-weight-normal: 400;
     --font-weight-medium: 500;
@@ -64,13 +93,14 @@
     --font-weight-bold: 700;
 
     --line-height-tight: 1.2;
-    --line-height-base: 1.4;
-    --line-height-relaxed: 1.6;
+    --line-height-base: 1.5;
+    --line-height-relaxed: 1.7;
 
-    /* Elevation */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Elevation — light, crisp shadows for panel definition */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-panel: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
 
     /* Motion */
     --duration-fast: 80ms;

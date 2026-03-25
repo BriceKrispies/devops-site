@@ -13,7 +13,7 @@ function renderSingleCard(cap) {
     const href = isNavigable ? ` href="${escapeAttr(cap.route)}"` : "";
     const statusClass = `cap-card--${cap.status}`;
     const riskClass = cap.risk !== "low" ? ` cap-card--risk-${cap.risk}` : "";
-    return `<${tag} class="cap-card ${statusClass}${riskClass}"${href}>
+    return `<${tag} class="cap-card ${statusClass}${riskClass}" data-feature="${escapeAttr(cap.id)}" data-status="${cap.status}"${href}>
     <div class="cap-card-header">
       <span class="cap-card-name">${escapeHtml(cap.name)}</span>
       <div class="cap-card-badges">

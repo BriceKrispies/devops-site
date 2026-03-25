@@ -13,7 +13,9 @@
       "Bash(for f:*)",
       "Bash(do echo:*)",
       "Read(//c/dev/devops-site/frontend/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(grep -E \"\\\\.\\(ts|html|css\\)$\")",
+      "Bash(find /c/dev/devops-site/frontend/src -name *auth* -o -name *session* -o -name *token* -o -name *login* -o -name *credential*)"
     ]
   }
 }

@@ -9,7 +9,7 @@ export function renderDeployments(deployments) {
         <th>When</th>
       </tr>
     </thead>
-    <tbody>${deployments.map((d) => `<tr>
+    <tbody>${deployments.map((d) => `<tr data-feature="${d.id}" data-status="${d.status}">
         <td data-label="Service">${d.service}</td>
         <td data-label="Env"><span class="badge badge--env">${d.environment}</span></td>
         <td data-label="Status"><span class="badge badge--${d.status}">${d.status}</span></td>

@@ -19,7 +19,6 @@
      ═══════════════════════════════════════════ */
   @media (max-width: 48em) {
 
-    /* ── Layout: drop sidebar from grid ── */
     .app-layout {
       grid-template-columns: 1fr;
       grid-template-areas:
@@ -27,17 +26,16 @@
         "main";
     }
 
-    /* ── Topbar: taller for touch, show hamburger ── */
     .topbar {
-      height: 2.75rem;
+      height: 3.25rem;
     }
 
     .topbar-menu-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.75rem;
-      height: 2.75rem;
+      width: 3.25rem;
+      height: 3.25rem;
       margin-left: calc(-1 * var(--space-4));
       padding: 0;
       border: none;
@@ -48,8 +46,8 @@
 
     .topbar-menu-toggle span {
       display: block;
-      width: 1rem;
-      height: 1.5px;
+      width: 1.125rem;
+      height: 2px;
       background: var(--color-text-secondary);
       border-radius: 1px;
       position: relative;
@@ -59,8 +57,8 @@
     .topbar-menu-toggle span::after {
       content: "";
       display: block;
-      width: 1rem;
-      height: 1.5px;
+      width: 1.125rem;
+      height: 2px;
       background: var(--color-text-secondary);
       border-radius: 1px;
       position: absolute;
@@ -68,20 +66,19 @@
     }
 
     .topbar-menu-toggle span::before {
-      top: -5px;
+      top: -6px;
     }
 
     .topbar-menu-toggle span::after {
-      top: 5px;
+      top: 6px;
     }
 
-    /* ── Sidebar: off-canvas drawer ── */
     .sidebar {
       position: fixed;
       top: 0;
       left: 0;
       bottom: 0;
-      width: 14rem;
+      width: 16rem;
       z-index: 200;
       transform: translateX(-100%);
       transition: transform var(--duration-base) var(--easing-default);
@@ -92,31 +89,27 @@
       transform: translateX(0);
     }
 
-    /* ── Backdrop ── */
     .sidebar-backdrop {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 199;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.25);
     }
 
     .sidebar-backdrop.is-open {
       display: block;
     }
 
-    /* ── Nav items: bigger touch targets ── */
     .nav-item {
       padding: var(--space-4) var(--space-5);
-      min-height: 2.75rem;
+      min-height: 3rem;
     }
 
-    /* ── Dashboard grid: single column ── */
     .dashboard-grid {
       grid-template-columns: 1fr;
     }
 
-    /* ── Search input: 16px prevents iOS zoom on focus ── */
     .trace-search-input {
       font-size: var(--font-size-base);
       padding: var(--space-4) var(--space-5);
@@ -128,12 +121,10 @@
      ═══════════════════════════════════════════ */
   @media (max-width: 30em) {
 
-    /* ── Service health: single column ── */
     .service-list {
       grid-template-columns: 1fr;
     }
 
-    /* ── Deploy table: stacked cards ── */
     .deploy-table thead {
       display: none;
     }
@@ -141,8 +132,8 @@
     .deploy-table tbody tr {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-1) var(--space-3);
-      padding: var(--space-3) var(--space-4);
+      gap: var(--space-2) var(--space-3);
+      padding: var(--space-4) var(--space-5);
       border-bottom: 1px solid var(--color-border-subtle);
     }
 
@@ -165,17 +156,15 @@
       background: transparent;
     }
 
-    /* Service name takes full width as the "title" */
     .deploy-table td[data-label="Service"] {
       flex-basis: 100%;
       font-size: var(--font-size-sm);
     }
 
-    /* ── Trace entries: wrap into rows ── */
     .trace-entry {
       flex-wrap: wrap;
-      padding: var(--space-3) var(--space-5);
-      row-gap: var(--space-1);
+      padding: var(--space-4) var(--space-5);
+      row-gap: var(--space-2);
     }
 
     .trace-type {
@@ -193,9 +182,8 @@
       flex-wrap: wrap;
     }
 
-    /* ── Trace prompt: tighter on small screens ── */
     .trace-prompt {
-      padding: var(--space-5) var(--space-4);
+      padding: var(--space-6) var(--space-5);
     }
   }
 }

@@ -1,3 +1,4 @@
+import { requireAuth } from "../../platform/auth-guard";
 import { createStore } from "../../state/store";
 import { registerAdapters } from "../../adapters/registry";
 import { bindRegion } from "../regions/region";
@@ -10,31 +11,32 @@ import { renderServiceHealth } from "../renderers/service-health";
 import { renderDeployments } from "../renderers/deployments";
 import { renderJobs } from "../renderers/jobs";
 import "../sidebar-toggle";
-// Phase 2: Create store and register adapters
-const store = createStore();
-const teardownAdapters = registerAdapters(store, [
-    mockServiceHealthAdapter,
-    mockDeploymentsAdapter,
-    mockJobsAdapter,
-]);
-// Phase 2: Bind regions to store topics
-const unsubs = [];
-const healthEl = queryRegion("services.health");
-if (healthEl) {
-    unsubs.push(bindRegion(healthEl, store, TOPICS.SERVICES_HEALTH, renderServiceHealth, "No services configured"));
-}
-const deploymentsEl = queryRegion("deployments.recent");
-if (deploymentsEl) {
-    unsubs.push(bindRegion(deploymentsEl, store, TOPICS.DEPLOYMENTS_RECENT, renderDeployments, "No recent deployments"));
-}
-const jobsEl = queryRegion("jobs.active");
-if (jobsEl) {
-    unsubs.push(bindRegion(jobsEl, store, TOPICS.JOBS_ACTIVE, renderJobs, "No active jobs"));
-}
-// Cleanup on page unload
-window.addEventListener("unload", () => {
-    for (const unsub of unsubs) {
-        unsub();
+requireAuth().then((ok) => {
+    if (!ok)
+        return;
+    const store = createStore();
+    const teardownAdapters = registerAdapters(store, [
+        mockServiceHealthAdapter,
+        mockDeploymentsAdapter,
+        mockJobsAdapter,
+    ]);
+    const unsubs = [];
+    const healthEl = queryRegion("services.health");
+    if (healthEl) {
+        unsubs.push(bindRegion(healthEl, store, TOPICS.SERVICES_HEALTH, renderServiceHealth, "No services configured"));
     }
-    teardownAdapters();
+    const deploymentsEl = queryRegion("deployments.recent");
+    if (deploymentsEl) {
+        unsubs.push(bindRegion(deploymentsEl, store, TOPICS.DEPLOYMENTS_RECENT, renderDeployments, "No recent deployments"));
+    }
+    const jobsEl = queryRegion("jobs.active");
+    if (jobsEl) {
+        unsubs.push(bindRegion(jobsEl, store, TOPICS.JOBS_ACTIVE, renderJobs, "No active jobs"));
+    }
+    window.addEventListener("unload", () => {
+        for (const unsub of unsubs) {
+            unsub();
+        }
+        teardownAdapters();
+    });
 });
